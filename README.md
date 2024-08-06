@@ -10,4 +10,5 @@ To download the latest version of this script:
     git clone https://github.com/rindotsh/reflector-updater
 
 ps: this is my first ever actual coding project, a small but good start. Here's to many more.
+
 To run this script, do chmod +x ~/reflector-updater/install.sh and then ./install.sh which contains both installation and uninstallation, should you want to remove this script
