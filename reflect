@@ -1,0 +1,46 @@
+#!/bin/bash
+
+#this will update the mirrorlist using reflector
+echo "Welcome $USER, this script will update your mirrorlist using reflector"
+
+reflector="/usr/bin/reflector"
+
+is_number() {
+    [[ $1 =~ ^[0-9]+$ ]]
+}
+
+reflector_update(){
+while true; do
+	read -p "Number of mirrors you want (recommended: 5 to 20): " user_input
+
+	if is_number "$user_input"; then
+		
+		echo "getting you $user_input mirror(s)"
+		sudo cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
+		sudo reflector --latest $user_input --sort rate --save /etc/pacman.d/mirrorlist
+		echo "Your mirrorlist has been updated :3"
+		break
+	else 
+		echo "Invalid input, please enter a number :("
+	fi
+done
+}
+if [ -e $reflector ]; then
+	reflector_update
+else 
+	echo "it appears that you do not have reflector :("
+	read -p "would you like to install reflector? (y/n)" reflector_install
+		case $reflector_install in
+
+			y) sudo pacman -Syu reflector
+			       	;;
+			n) exit
+			       	;;
+			*) exit
+			       	;;
+		esac
+	if [ -e $reflector ]; then 
+	reflector_update
+	else exit
+	fi
+fi
