@@ -1,3 +1,5 @@
+#!/bin/bash
+
 echo "######################################"
 echo " WELCOME TO RIN'S FIRST FOSS PROJECT"
 echo "######################################"
